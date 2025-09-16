@@ -17,13 +17,13 @@ let lang = localStorage.getItem("lang") || "en";
 function showRegister() {
     document.getElementById("loginForm").style.display = "none";
     document.getElementById("registerForm").style.display = "block";
-    document.getElementById("title").innerText = lang === "en" ? "Register" : "تسجيل";
+    document.getElementById("title").innerText = lang === "en" ? "Register" : "تسجيل الحساب";
 }
 
 function showLogin() {
     document.getElementById("registerForm").style.display = "none";
     document.getElementById("loginForm").style.display = "block";
-    document.getElementById("title").innerText = lang === "en" ? "Login" : "دخول";
+    document.getElementById("title").innerText = lang === "en" ? "Login" : "دخول تسجيل";
 }
 
 // Register new user
@@ -103,7 +103,7 @@ function renderTasks() {
 function editTask(i) {
     let user = localStorage.getItem("currentUser");
     let users = JSON.parse(localStorage.getItem("users"));
-    let newTask = prompt("Edit Task", users[user].tasks[i]);
+    let newTask = prompt(lang === "en"? "Edit Task:" :":تعديل", users[user].tasks[i]);
     if (newTask) {
         users[user].tasks[i] = newTask;
         localStorage.setItem("users", JSON.stringify(users));
@@ -129,7 +129,11 @@ const translations = {
         addTask: "Add Task",
         logout: "Logout",
         toggle: "🌐 Toggle Language",
-        welcome: "Welcome ",
+        welcome: "Welcome, ",
+        dha: "Don't have an account?",
+        dhaBtn: "Register Now",
+        aha: "Already have an account?",
+        ahaBtn: "Login",
         alerts: {
             exists: "User already exists!",
             registered: "Registered successfully!",
@@ -140,14 +144,18 @@ const translations = {
     },
     ar: {
         login: "تسجيل الدخول",
-        register: "تسجيل",
+        register: "تسجيل الحساب",
         username: "اسم المستخدم",
         password: "كلمة المرور",
         newTask: "مهمة جديدة",
         addTask: "إضافة مهمة",
         logout: "تسجيل الخروج",
         toggle: "🌐 تغيير اللغة",
-        welcome: "مرحبا ",
+        welcome: "مرحباً، ",
+        dha: "ليس لديك حساب؟",
+        dhaBtn: "سجل الآن",
+        aha: "لديك حساب بالفعل؟",
+        ahaBtn: "تسجيل الدخول",
         alerts: {
             exists: "المستخدم موجود بالفعل!",
             registered: "تم التسجيل بنجاح!",
@@ -169,6 +177,11 @@ function applyTranslations() {
         document.getElementById("loginPass").placeholder = t.password;
         document.getElementById("regUser").placeholder = t.username;
         document.getElementById("regPass").placeholder = t.password;
+        document.getElementById("title").innerText = t.login;
+        document.getElementById("dha").innerText = t.dha;
+        document.getElementById("dhaBtn").innerText = t.dhaBtn;
+        document.getElementById("aha").innerText = t.aha;
+        document.getElementById("ahaBtn").innerText = t.ahaBtn;
     }
 
     // tasks.html

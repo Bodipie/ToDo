@@ -13,14 +13,14 @@
         <input type="text" id="loginUser" placeholder="Username">
         <input type="password" id="loginPass" placeholder="Password">
         <button id="loginBtn" onclick="login()">Login</button>
-        <p>Don’t have an account? <a href="#" onclick="showRegister()">Register</a></p>
+        <p id="dha">Don’t have an account?</p> <a href="#" onclick="showRegister()" id="dhaBtn">Register</a>
     </div>
     
     <div id="registerForm" style="display:none;">
         <input type="text" id="regUser" placeholder="Username">
         <input type="password" id="regPass" placeholder="Password">
         <button id="registerBtn" onclick="register()">Register</button>
-        <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+        <p id="aha">Already have an account?</p> <a href="#" onclick="showLogin()" id="ahaBtn">Login</a>
     </div>
     
     <button id="langToggle" onclick="toggleLanguage()">🌐 Toggle Language</button>
