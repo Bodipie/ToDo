@@ -12,18 +12,18 @@
     <div id="loginForm">
         <input type="text" id="loginUser" placeholder="Username">
         <input type="password" id="loginPass" placeholder="Password">
-        <button onclick="login()">Login</button>
+        <button id="loginBtn" onclick="login()">Login</button>
         <p>Don’t have an account? <a href="#" onclick="showRegister()">Register</a></p>
     </div>
-
+    
     <div id="registerForm" style="display:none;">
         <input type="text" id="regUser" placeholder="Username">
         <input type="password" id="regPass" placeholder="Password">
-        <button onclick="register()">Register</button>
+        <button id="registerBtn" onclick="register()">Register</button>
         <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
     </div>
-
-    <button onclick="toggleLanguage()">🌐 Toggle Language</button>
+    
+    <button id="langToggle" onclick="toggleLanguage()">🌐 Toggle Language</button>
     <script src="script.js"></script>
 </body>
 

@@ -9,14 +9,15 @@
 
 <body>
     <h1 id="welcome"></h1>
-    <button onclick="logout()">Logout</button>
-    <button onclick="toggleLanguage()">🌐 Toggle Language</button>
-
+    <button id="logoutBtn" onclick="logout()">Logout</button>
+    <button id="langToggle" onclick="toggleLanguage()">🌐 Toggle Language</button>
+    
     <div>
         <input type="text" id="taskInput" placeholder="New Task">
-        <button onclick="addTask()">Add Task</button>
+        <button id="addTaskBtn" onclick="addTask()">Add Task</button>
     </div>
-
+    
+    <ul id="taskList"></ul>
     <ul id="taskList"></ul>
     <script src="script.js"></script>
 </body>

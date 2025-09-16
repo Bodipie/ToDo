@@ -119,12 +119,109 @@ function deleteTask(i) {
     renderTasks();
 }
 
+const translations = {
+    en: {
+        login: "Login",
+        register: "Register",
+        username: "Username",
+        password: "Password",
+        newTask: "New Task",
+        addTask: "Add Task",
+        logout: "Logout",
+        toggle: "🌐 Toggle Language",
+        welcome: "Welcome ",
+        alerts: {
+            exists: "User already exists!",
+            registered: "Registered successfully!",
+            invalid: "Invalid login!",
+            fill: "Fill all fields"
+        },
+        buttons: { edit: "Edit", del: "Delete" }
+    },
+    ar: {
+        login: "تسجيل الدخول",
+        register: "تسجيل",
+        username: "اسم المستخدم",
+        password: "كلمة المرور",
+        newTask: "مهمة جديدة",
+        addTask: "إضافة مهمة",
+        logout: "تسجيل الخروج",
+        toggle: "🌐 تغيير اللغة",
+        welcome: "مرحبا ",
+        alerts: {
+            exists: "المستخدم موجود بالفعل!",
+            registered: "تم التسجيل بنجاح!",
+            invalid: "بيانات الدخول غير صحيحة!",
+            fill: "املأ جميع الحقول"
+        },
+        buttons: { edit: "تعديل", del: "حذف" }
+    }
+};
+
+function applyTranslations() {
+    let t = translations[lang];
+
+    // index.html
+    if (document.getElementById("loginBtn")) {
+        document.getElementById("loginBtn").innerText = t.login;
+        document.getElementById("registerBtn").innerText = t.register;
+        document.getElementById("loginUser").placeholder = t.username;
+        document.getElementById("loginPass").placeholder = t.password;
+        document.getElementById("regUser").placeholder = t.username;
+        document.getElementById("regPass").placeholder = t.password;
+    }
+
+    // tasks.html
+    if (document.getElementById("addTaskBtn")) {
+        document.getElementById("addTaskBtn").innerText = t.addTask;
+        document.getElementById("taskInput").placeholder = t.newTask;
+        document.getElementById("logoutBtn").innerText = t.logout;
+    }
+
+    // common
+    if (document.getElementById("langToggle")) {
+        document.getElementById("langToggle").innerText = t.toggle;
+    }
+
+    document.body.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+}
+
+// Update renderTasks() to translate buttons
+function renderTasks() {
+    let user = localStorage.getItem("currentUser");
+    if (!user) return;
+
+    let t = translations[lang];
+    document.getElementById("welcome").innerText = t.welcome + user;
+
+    let users = JSON.parse(localStorage.getItem("users"));
+    let list = document.getElementById("taskList");
+    list.innerHTML = "";
+
+    users[user].tasks.forEach((task, i) => {
+        let li = document.createElement("li");
+        li.innerHTML = `
+            <span>${task}</span>
+            <div>
+                <button onclick="editTask(${i})">${t.buttons.edit}</button>
+                <button onclick="deleteTask(${i})">${t.buttons.del}</button>
+            </div>
+        `;
+        list.appendChild(li);
+    });
+}
+
+// Override toggleLanguage
 function toggleLanguage() {
     lang = lang === "en" ? "ar" : "en";
     localStorage.setItem("lang", lang);
-    alert(lang === "en" ? "Switched to English" : "تم التبديل إلى العربية");
-    location.reload();
+    applyTranslations();
+    if (window.location.pathname.includes("tasks.html")) renderTasks();
 }
+
+// Run on load
+document.addEventListener("DOMContentLoaded", applyTranslations);
+
 
 if (window.location.pathname.includes("tasks.html")) {
     renderTasks();
